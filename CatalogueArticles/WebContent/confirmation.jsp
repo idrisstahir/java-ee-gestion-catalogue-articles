@@ -15,7 +15,7 @@
 		
 			<div class="form-group">
 				<label>ID:</label>
-				<label>${article.id_article}</label>
+				<label>${article.idArticle}</label>
 			</div>
 			<div class="form-group">
 				<label>Désignation:</label>
