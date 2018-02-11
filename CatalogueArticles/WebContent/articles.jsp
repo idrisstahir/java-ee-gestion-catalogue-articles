@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Accueil</title>
+	<title>Articles</title>
 	<link rel="Stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 </head>
 <body>

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,13 +26,14 @@ public class ControleurServlet extends HttpServlet {
 	protected void doGet
 	(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String path = request.getServletPath();
+		String chemin = request.getServletPath();
 		
-		if(path.equals("/index.do")) {
+		if(chemin.equals("/index.do"))
+		{
 			request.getRequestDispatcher("articles.jsp").forward(request, response);
 		}
-		else if(path.equals("/chercher.do")) {
-			
+		else if(chemin.equals("/chercher.do"))
+		{
 			String motCle = request.getParameter("motCle");
 			
 			ArticleModel model = new ArticleModel();
@@ -45,13 +45,29 @@ public class ControleurServlet extends HttpServlet {
 			request.setAttribute("model", model);
 			request.getRequestDispatcher("articles.jsp").forward(request, response);
 		}
-		else if(path.equals("/saisie.do")) {
-			
+		else if(chemin.equals("/saisie.do"))
+		{
 			request.getRequestDispatcher("saisieArticle.jsp").forward(request, response);
+		
 		}
-		else {
+		else if(chemin.equals("/saveArticle.do") && (request.getMethod().equals("POST"))) 
+		{
+			String desi = request.getParameter("designation");
+			double prix = Double.parseDouble(request.getParameter("prix"));
+			int qte= Integer.parseInt(request.getParameter("quantite"));
+			Article a = metier.saveArticle(new Article(desi, prix, qte));
+			request.setAttribute("article", a);
+			request.getRequestDispatcher("confirfation.jsp").forward(request, response);
+		}
+		else
+		{
 			response.sendError(response.SC_NOT_FOUND);
 		}
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }
