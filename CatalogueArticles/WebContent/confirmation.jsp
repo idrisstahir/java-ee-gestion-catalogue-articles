@@ -7,8 +7,9 @@
 	<link rel="Stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 </head>
 <body>
-<%@include file="entete.jsp" %>
+
 <div class="container col-md-8 col-md-offset-2">
+<%@include file="entete.jsp" %>
 	<div class="panel panel-primary">
 		<div class="panel-heading">Confirmation</div>
 		<div class="panel-body">
