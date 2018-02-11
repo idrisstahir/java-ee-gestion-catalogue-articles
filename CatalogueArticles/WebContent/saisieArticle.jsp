@@ -16,15 +16,15 @@
 			<form action="saveArticle.do" method="post">
 				<div class="form-group">
 					<label class=control-label>Désignation</label>
-					<input type="text" name="designation" class="form-control"/>
+					<input type="text" name="designation" value="${article.designation}" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<label class=control-label>Prix</label>
-					<input type="text" name="designation" class="form-control"/>
+					<input type="text" name="prix" value="${article.prix}" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<label class=control-label>Quantité</label>
-					<input type="text" name="designation" class="form-control"/>
+					<input type="text" name="quantite" value="${article.quantite}" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary" >Save</button>

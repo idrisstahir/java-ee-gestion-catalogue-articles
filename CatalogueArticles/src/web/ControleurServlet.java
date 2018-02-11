@@ -47,6 +47,7 @@ public class ControleurServlet extends HttpServlet {
 		}
 		else if(chemin.equals("/saisie.do"))
 		{
+			request.setAttribute("article", new Article());
 			request.getRequestDispatcher("saisieArticle.jsp").forward(request, response);
 		
 		}
