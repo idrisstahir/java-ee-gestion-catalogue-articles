@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Insert title here</title>
+	<title>Accueil</title>
 	<link rel="Stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 </head>
 <body>
-<p></p>
+<%@include file="entete.jsp" %>
 <div class="container col-md-10 col-md-offset-1">
 	<div class="panel panel-primary">
 		<div class="panel-heading"> Recherche des articles</div>

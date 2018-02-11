@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ArticleDaoImpl;
 import dao.IArticleDao;
 import metier.entites.Article;
+
 
 public class ControleurServlet extends HttpServlet {
 	
@@ -42,6 +44,10 @@ public class ControleurServlet extends HttpServlet {
 			
 			request.setAttribute("model", model);
 			request.getRequestDispatcher("articles.jsp").forward(request, response);
+		}
+		else if(path.equals("/saisie.do")) {
+			
+			request.getRequestDispatcher("saisieArticle.jsp").forward(request, response);
 		}
 		else {
 			response.sendError(response.SC_NOT_FOUND);
