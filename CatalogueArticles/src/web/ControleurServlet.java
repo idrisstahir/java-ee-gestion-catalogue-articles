@@ -57,7 +57,7 @@ public class ControleurServlet extends HttpServlet {
 			int qte= Integer.parseInt(request.getParameter("quantite"));
 			Article a = metier.saveArticle(new Article(desi, prix, qte));
 			request.setAttribute("article", a);
-			request.getRequestDispatcher("confirfation.jsp").forward(request, response);
+			request.getRequestDispatcher("confirmation.jsp").forward(request, response);
 		}
 		else
 		{
