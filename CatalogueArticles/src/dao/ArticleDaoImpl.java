@@ -22,6 +22,7 @@ public class ArticleDaoImpl implements IArticleDao {
 			ps1.setString(1, a.getDesignation());
 			ps1.setDouble(2, a.getPrix());
 			ps1.setInt(3, a.getQuantite());
+			
 			ps1.executeUpdate();
 			
 			PreparedStatement ps2 = connection.prepareStatement
@@ -31,6 +32,8 @@ public class ArticleDaoImpl implements IArticleDao {
 			if(rs.next()) {
 				a.setIdArticle(rs.getLong("max_id"));
 			}
+			
+			ps1.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,19 +72,68 @@ public class ArticleDaoImpl implements IArticleDao {
 
 	@Override
 	public Article getArticle(Long idArticle) {
-		// TODO Auto-generated method stub
-		return null;
+		Article a = null;
+		Connection connection = SingleConnect.getConnection();
+		try {
+			PreparedStatement ps = connection.prepareStatement
+					("SELECT * FROM articles WHERE id_article = ?");
+			
+			ps.setLong(1, idArticle);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				a = new Article();
+				a.setIdArticle(rs.getLong("id_article"));
+				a.setDesignation(rs.getString("designation"));
+				a.setPrix(rs.getDouble("prix"));
+				a.setQuantite(rs.getInt("quantite"));
+			};
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return a;
 	}
 
 	@Override
 	public Article updateArticle(Article a) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection connection = SingleConnect.getConnection();
+		
+		try {
+			PreparedStatement ps1 = connection.prepareStatement
+					("UPDATE articles SET designation=?, prix=?, quantite=? WHERE id_article=?");
+			
+			ps1.setString(1, a.getDesignation());
+			ps1.setDouble(2, a.getPrix());
+			ps1.setInt(3, a.getQuantite());
+			ps1.setLong(4, a.getIdArticle());
+			
+			ps1.executeUpdate();
+			
+			ps1.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return a;
 	}
 
 	@Override
 	public void deleteArticle(Long idArticle) {
-		// TODO Auto-generated method stub
+		
+		Connection connection = SingleConnect.getConnection();
+		
+		try {
+			PreparedStatement ps1 = connection.prepareStatement
+					("DELETE FROM articles WHERE id_article = ?");
+			ps1.setLong(1, idArticle);
+			ps1.executeUpdate();
+			ps1.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 

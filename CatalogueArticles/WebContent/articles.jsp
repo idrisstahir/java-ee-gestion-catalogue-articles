@@ -30,6 +30,8 @@
 						<td>${a.designation}</td>
 						<td>${a.prix}</td>
 						<td>${a.quantite}</td>
+						<td><a onclick="return confirm('êtes vous sûre de vouloir supprimer?')" href="supprimerArticle.do?id=${a.idArticle}">Supprimer</a></td>
+						<td><a href="editerArticle.do?id=${a.idArticle}">Editer</a></td>
 					</tr>
 				</c:forEach>
 			</table>

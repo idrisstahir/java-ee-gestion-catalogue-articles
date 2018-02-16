@@ -3,6 +3,7 @@ package web;
 import java.io.IOException;
 import java.util.List;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -57,6 +58,36 @@ public class ControleurServlet extends HttpServlet {
 			double prix = Double.parseDouble(request.getParameter("prix"));
 			int qte= Integer.parseInt(request.getParameter("quantite"));
 			Article a = metier.saveArticle(new Article(desi, prix, qte));
+			request.setAttribute("article", a);
+			request.getRequestDispatcher("confirmation.jsp").forward(request, response);
+		}
+		else if(chemin.equals("/supprimerArticle.do")) {
+			
+			Long idArticle = Long.parseLong(request.getParameter("id"));
+			metier.deleteArticle(idArticle);
+			
+			//request.getRequestDispatcher("articles.jsp").forward(request, response);
+			response.sendRedirect("chercher.do?motCle=");
+		}
+		else if(chemin.equals("/editerArticle.do")) {
+			
+			Long idArticle = Long.parseLong(request.getParameter("id"));
+			Article a = metier.getArticle(idArticle);
+			request.setAttribute("article", a);
+			request.getRequestDispatcher("editionArticle.jsp").forward(request, response);
+		}
+		else if(chemin.equals("/updateArticle.do") && (request.getMethod().equals("POST"))) 
+		{
+			Long idArticle = Long.parseLong(request.getParameter("id"));
+			String desi = request.getParameter("designation");
+			double prix = Double.parseDouble(request.getParameter("prix"));
+			int qte= Integer.parseInt(request.getParameter("quantite"));
+			
+			Article a = new Article(desi, prix, qte);
+			a.setIdArticle(idArticle);
+			
+			metier.updateArticle(a);
+			
 			request.setAttribute("article", a);
 			request.getRequestDispatcher("confirmation.jsp").forward(request, response);
 		}

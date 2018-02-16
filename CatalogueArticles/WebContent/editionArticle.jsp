@@ -14,7 +14,13 @@
 		<div class="panel-heading"> Saisie d'un article</div>
 		<div class="panel-body">
 		
-			<form action="saveArticle.do" method="post">
+			<form action="updateArticle.do" method="post">
+				<div class="form-group">
+					<label class=control-label>ID article: </label>
+					<input type="hidden" name="id" value="${article.idArticle}" class="form-control" required="required"/>
+					<label>${article.idArticle}</label>
+					<span></span>
+				</div>
 				<div class="form-group">
 					<label class=control-label>Désignation</label>
 					<input type="text" name="designation" value="${article.designation}" class="form-control" required="required"/>
